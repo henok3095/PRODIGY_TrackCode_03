@@ -1,0 +1,183 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background: url(images/AdobeStock_624499925.jpg);
+    background-size: cover;
+    overflow: hidden; 
+}
+
+.container {
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 20px; 
+    max-width: 95vw; 
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+    text-align: center;
+    color: white;
+}
+
+h1 {
+    font-size: 2em; 
+    margin-bottom: 10px;
+    font-family: 'Roboto', sans-serif;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.game-board {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90vw;
+    max-width: 320px; 
+    height: 90vw; 
+    max-height: 320px; 
+    margin: 0 auto;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.cells {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 10px;
+    width: 100%;
+    height: 100%;
+}
+
+.cell {
+    background: rgba(255, 255, 255, 0.5);
+    border: 2px solid rgba(255, 255, 255, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3em; 
+    font-weight: bold;
+    color: rgba(255, 255, 255, 1);
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.3s ease, transform 0.2s ease, border-color 0.3s ease;
+    border-radius: 12px;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+}
+
+.cell:hover {
+    background: rgba(255, 255, 255, 0.6);
+    transform: scale(1.05);
+    border-color: #ccc;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.4), 0 0 10px rgba(255, 255, 255, 1);
+}
+
+.cell.x {
+    background: rgba(255, 64, 129, 0.5); 
+    border: 3px solid rgba(255, 64, 129, 1);
+    box-shadow: 0 0 15px rgba(255, 64, 129, 1), 0 0 30px rgba(255, 64, 129, 1);
+    color: #ff4081 !important;
+    text-shadow: 0 0 10px rgba(255, 64, 129, 1), 0 0 20px rgba(255, 64, 129, 1), 0 0 30px rgba(255, 64, 129, 1) !important;
+}
+
+.cell.o {
+    background: rgba(0, 188, 212, 0.5);
+    border: 3px solid rgba(0, 188, 212, 1);
+    box-shadow: 0 0 15px rgba(0, 188, 212, 1), 0 0 30px rgba(0, 188, 212, 1);
+    color: #00bcd4 !important;
+    text-shadow: 0 0 10px rgba(0, 188, 212, 1), 0 0 20px rgba(0, 188, 212, 1), 0 0 30px rgba(0, 188, 212, 1) !important;
+}
+
+
+@keyframes glow {
+    0% {
+        box-shadow: 0 0 20px rgba(255, 255, 0, 0.8), 0 0 40px rgba(255, 255, 0, 0.8), 0 0 60px rgba(255, 255, 0, 0.8);
+    }
+    50% {
+        box-shadow: 0 0 40px rgba(255, 255, 0, 1), 0 0 60px rgba(255, 255, 0, 1), 0 0 80px rgba(255, 255, 0, 1);
+    }
+    100% {
+        box-shadow: 0 0 20px rgba(255, 255, 0, 0.8), 0 0 40px rgba(255, 255, 0, 0.8), 0 0 60px rgba(255, 255, 0, 0.8);
+    }
+}
+
+.glow {
+    animation: glow 1s infinite;
+}
+
+
+@keyframes confetti {
+    0% { transform: translateY(-100vh); opacity: 1; }
+    100% { transform: translateY(100vh); opacity: 0; }
+}
+
+.confetti {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 1000;
+    overflow: hidden;
+}
+
+.confetti::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('https://cdn.pixabay.com/photo/2017/08/30/06/46/confetti-2693697_960_720.png') repeat;
+    animation: confetti 2s ease-in-out;
+}
+
+#status {
+    margin-top: 20px;
+    font-size: 1.2em;
+    font-weight: bold;
+    transition: all 0.5s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.winner-announcement {
+    animation: announcement 2s ease-out;
+}
+
+@keyframes announcement {
+    0% { transform: scale(0.5); opacity: 0; }
+    50% { transform: scale(1.2); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.mode-button, .restart-button {
+    background: linear-gradient(to right, #56ab2f, #a8e063);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 1em; 
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.mode-button:hover, .restart-button:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+}
+
+.mode-button:active, .restart-button:active {
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
